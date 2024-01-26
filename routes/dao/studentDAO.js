@@ -8,6 +8,15 @@ async function regStudentDAO(data){
         return result
 } 
 
+async function loginDAO(data){
+    const {uid, pwd} = data
+    var db = await getDBCon();
+    var collection=db.collection('students')
+    var result = await collection.find({uid, pwd}).toArray()
+    return result;
+
+}
+
 async function getStudentDAO(){
     console.log("getStudentDAO")
     var db = await getDBCon();
@@ -18,5 +27,6 @@ async function getStudentDAO(){
 
 module.exports={
     regStudentDAO,
-    getStudentDAO
+    getStudentDAO,
+    loginDAO
 }
